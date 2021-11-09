@@ -13,6 +13,7 @@ export class UsersService {
 
   async create(user: createUserType): Promise<User> {
     const createUser = await this.usersRepository.create(user);
+    console.log('!');
     return createUser;
   }
   async findOne(data: userIdType): Promise<User | undefined> {
