@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  api-server:
+    container_name: api-server
+    build: .
+    tty: true
+    restart: always
+    ports:
+      - '3000:3000'
+    volumes:
+      - type: bind
+        source: .
+        target: /api-server
+    #ここから追記
+    depends_on:
+      - db-server
+  db-server:
+    container_name: db-server
+    image: mysql:8.0.2
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: katsu5012
+      MYSQL_DATABASE: todo
+      MYSQL_USER: katsu_todo
+      MYSQL_PASSWORD: katsu5012
+#ここまで追記

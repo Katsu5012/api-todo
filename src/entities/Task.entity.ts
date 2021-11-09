@@ -1,0 +1,38 @@
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { User } from './User.entity';
+
+@Entity('tasks')
+export class Task {
+  @PrimaryGeneratedColumn()
+  task_id!: number;
+
+  @Column()
+  body!: string;
+
+  @Column({ default: false })
+  is_done!: boolean;
+
+  @Column()
+  importance!: number;
+
+  @Column()
+  deadline!: string;
+
+  @CreateDateColumn()
+  created_at!: Date;
+
+  @UpdateDateColumn()
+  updated_at!: Date;
+
+  @ManyToOne(() => User, (user: User) => user.tasks, {})
+  @JoinColumn({ name: 'user_id', referencedColumnName: 'user_id' })
+  user: User;
+}
