@@ -31,3 +31,4 @@ export class Task {
   @UpdateDateColumn()
   updated_at!: Date;
 }
+console.log('sss');
